@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6488F5"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+  </defs>
+  <!-- Background gelap tanpa garis pinggir -->
+  <rect width="120" height="120" rx="28" fill="#111111"/>
+  <!-- Ukuran teks digedein dari 64 jadi 76 biar lebih jelas di tab kecil -->
+  <text x="50%" y="54%" font-family="sans-serif" font-weight="bold" font-size="76" fill="url(#grad)" text-anchor="middle" dominant-baseline="middle">Kh</text>
+</svg>
