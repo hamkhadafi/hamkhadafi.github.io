@@ -177,12 +177,10 @@ nav {
   display: none;
   position: fixed;
   top: 60px; left: 0; right: 0;
-  background: rgba(8,8,8,0.98);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background-color: #080808;
   border-bottom: 1px solid var(--border);
   padding: 1.5rem 5%;
-  z-index: 99;
+  z-index: 999;
   flex-direction: column;
   transform: translateY(-8px);
   opacity: 0;
@@ -211,6 +209,7 @@ nav {
   align-items: center;
   padding: 0 5%;
   padding-top: 60px;
+  padding-bottom: 7rem;
   position: relative;
   overflow: hidden;
 }
@@ -862,6 +861,14 @@ footer {
   gap: 1rem;
 }
 
+footer > span {
+  flex: 1;
+}
+
+footer > span:last-child {
+  text-align: right;
+}
+
 .footer-socials { display: flex; gap: 1rem; align-items: center; }
 
 .footer-socials a {
@@ -902,6 +909,87 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .reveal { opacity: 1; transform: none; }
+}
+
+/* WIP MODAL */
+.wip-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.wip-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.wip-card {
+  background: var(--card);
+  border: 1px solid var(--border-h);
+  border-radius: 6px;
+  padding: 2.5rem 2rem;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  transform: translateY(12px);
+  transition: transform 0.25s ease;
+}
+
+.wip-overlay.active .wip-card {
+  transform: translateY(0);
+}
+
+.wip-icon {
+  font-size: 2.25rem;
+  margin-bottom: 1.25rem;
+  display: block;
+}
+
+.wip-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.wip-desc {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+}
+
+.wip-close-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.75rem;
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.wip-close-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
 }
 </style>
 <!-- Google tag (gtag.js) -->
@@ -954,7 +1042,7 @@ footer {
       </p>
       <div class="hero-cta">
         <a href="#projects" class="btn-primary">View Projects →</a>
-        <a href="#" class="btn-ghost">View Resume</a>
+        <a href="CV_Ilham_Khadafi.pdf" target="_blank" rel="noopener" class="btn-ghost">View Resume</a>
         <a href="#contact" class="btn-ghost">Get in Touch</a>
       </div>
     </div>
@@ -1015,11 +1103,11 @@ footer {
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
               GitHub
             </a>
-            <a href="slide-gojek.pdf" target="_blank" rel="noopener" class="plink">
+            <a href="#" onclick="showWipModal(event)" class="plink">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
               White Paper
             </a>
-            <a href="#" target="_blank" rel="noopener" class="plink">
+            <a href="Gojek_LDA_Slides.pdf" target="_blank" rel="noopener" class="plink">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
               Slides
             </a>
@@ -1047,11 +1135,11 @@ footer {
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
               GitHub
             </a>
-            <a href="#" target="_blank" rel="noopener" class="plink">
+            <a href="#" onclick="showWipModal(event)" class="plink">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
               White Paper
             </a>
-            <a href="#" target="_blank" rel="noopener" class="plink">
+            <a href="#" onclick="showWipModal(event)" class="plink">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
               Slides
             </a>
@@ -1079,11 +1167,11 @@ footer {
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
               GitHub
             </a>
-            <a href="#" target="_blank" rel="noopener" class="plink">
+            <a href="#" onclick="showWipModal(event)" class="plink">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
               White Paper
             </a>
-            <a href="#" target="_blank" rel="noopener" class="plink">
+            <a href="#" onclick="showWipModal(event)" class="plink">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
               Slides
             </a>
@@ -1138,13 +1226,13 @@ footer {
         <div class="article-arrow">Read on Medium <span>→</span></div>
       </a>
 
-      <a href="#" target="_blank" rel="noopener" class="article-card reveal">
+      <a href="https://medium.com/@hamkhadafi/i-gave-three-ai-models-the-same-stock-data-they-disagreed-on-everything-f5e42499406c?sharedUserId=hamkhadafi" target="_blank" rel="noopener" class="article-card reveal">
         <div class="article-tags">
           <span class="article-tag">Machine Learning</span>
           <span class="article-tag">Deep Learning</span>
         </div>
         <div class="article-title">I Gave Three AI Models the Same Stock Data. They Disagreed on Everything.</div>
-        <p class="article-excerpt">LightGBM, TFT, and iTransformer on the same features, same evaluation. One won on magnitude. One won on direction. One won on Sharpe. Understanding why reveals something real about the prediction task.</p>
+        <p class="article-excerpt">LightGBM won on magnitude. iTransformer won on direction. TFT struggled to learn at all. Understanding why revealed more about the market than any single prediction could.</p>
         <div class="article-arrow">Read on Medium <span>→</span></div>
       </a>
 
@@ -1247,7 +1335,7 @@ footer {
         <div class="contact-card-action">Send a message <span>→</span></div>
       </a>
 
-      <a href="#" class="contact-card-primary reveal">
+      <a href="CV_Ilham_Khadafi.pdf" target="_blank" rel="noopener" class="contact-card-primary reveal">
         <div class="contact-card-icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -1282,7 +1370,7 @@ footer {
 </section>
 
 <footer>
-  <span>© 2026 HamKhadafi</span>
+  <span></span>
   <div class="footer-socials">
     <a href="https://github.com/hamkhadafi" target="_blank" rel="noopener" aria-label="GitHub">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
@@ -1296,6 +1384,16 @@ footer {
   </div>
   <span>Designed & Built by Ilham Khadafi</span>
 </footer>
+
+<!-- WIP MODAL -->
+<div class="wip-overlay" id="wip-overlay" role="dialog" aria-modal="true" aria-labelledby="wip-title">
+  <div class="wip-card">
+    <span class="wip-icon">⏳</span>
+    <div class="wip-title" id="wip-title">Work in Progress (WIP)</div>
+    <p class="wip-desc">The report and slides are currently being compiled and will be deployed soon. Please check the GitHub repository for the full technical implementation.</p>
+    <button class="wip-close-btn" onclick="closeWipModal()">Got it</button>
+  </div>
+</div>
 
 <script>
 const progressBar = document.getElementById('scroll-progress');
@@ -1345,6 +1443,27 @@ document.getElementById('carousel-next').addEventListener('click', () => carouse
 const writingCarousel = document.getElementById('writing-carousel');
 document.getElementById('writing-carousel-prev').addEventListener('click', () => writingCarousel.scrollBy({ left: -385, behavior: 'smooth' }));
 document.getElementById('writing-carousel-next').addEventListener('click', () => writingCarousel.scrollBy({ left: 385, behavior: 'smooth' }));
+
+function showWipModal(e) {
+  e.preventDefault();
+  document.getElementById('wip-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeWipModal() {
+  document.getElementById('wip-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close modal when clicking the backdrop
+document.getElementById('wip-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeWipModal();
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeWipModal();
+});
 </script>
 
 </body>
