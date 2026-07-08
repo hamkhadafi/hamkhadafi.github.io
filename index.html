@@ -176,12 +176,20 @@ nav {
 .mobile-menu {
   display: none;
   position: fixed;
-  top: 60px; left: 0; right: 0;
-  background-color: #080808;
+  top: 60px; 
+  left: 0; 
+  right: 0; 
+  height: auto !important; 
+  bottom: auto !important; 
+  background: rgba(8, 8, 8, 0.85); 
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
-  padding: 1.5rem 5%;
-  z-index: 999;
+  padding: 1rem 5% 1.25rem 5%; 
+  z-index: 9999;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch; 
   transform: translateY(-8px);
   opacity: 0;
   transition: transform 0.25s ease, opacity 0.25s ease;
@@ -194,9 +202,11 @@ nav {
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
-  padding: 0.85rem 0;
+  padding: 1rem 0; 
   border-bottom: 1px solid var(--border);
   transition: color 0.2s;
+  display: block; 
+  text-align: center;
 }
 
 .mobile-menu a:last-child { border-bottom: none; }
@@ -1283,25 +1293,21 @@ footer > span:last-child {
           <div class="skills-list">
             <span class="skill-chip">Python</span>
             <span class="skill-chip">R</span>
-            <span class="skill-chip">C++</span>
+            <span class="skill-chip">SQL</span>
             <span class="skill-chip">PyTorch</span>
             <span class="skill-chip">OpenCV</span>
             <span class="skill-chip">scikit-learn</span>
-            <span class="skill-chip">LightGBM</span>
-            <span class="skill-chip">Gensim</span>
-            <span class="skill-chip">Pandas</span>
-            <span class="skill-chip">NumPy</span>
-            <span class="skill-chip">SQL</span>
+            <span class="skill-chip">LangChain</span>
           </div>
         </div>
 
         <div class="skills-group">
           <div class="skills-label">Tools</div>
           <div class="skills-list">
-            <span class="skill-chip">Git</span>
+            <span class="skill-chip">Microsoft Office</span>
             <span class="skill-chip">Docker</span>
-            <span class="skill-chip">Jupyter</span>
-            <span class="skill-chip">Google Colab</span>
+            <span class="skill-chip">Git</span>
+            <span class="skill-chip">Power BI</span>
             <span class="skill-chip">VS Code</span>
           </div>
         </div>
